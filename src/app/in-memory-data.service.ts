@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HEADER_OFFSET } from '@angular/core/src/render3/interfaces/view';
+import { InMemoryDbService } from 'angular-in-memory-web-api';
+import { Hero } from './hero';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,11 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 20, name: 'Tornado' }
     ];
     return {heros};
+  }
+
+  genId(heros:Hero[]): number{
+    return heros.length > 0 ? Math.max(...heros.map(hero=>hero.id))+1 : 11;
+
   }
 
 
