@@ -21,6 +21,13 @@ getHero(): void {
 goBack(): void{
   this.location.back();
 }
+
+
+save(): void{
+  this.heroService.updateHero(this.actor).
+  subscribe(()=>this.location.back());
+
+}
   constructor(
 
   	private heroService: HeroService,
