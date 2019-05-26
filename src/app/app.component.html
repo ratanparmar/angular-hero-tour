@@ -1,13 +1,15 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
+<div style="text-align:center" class="jumbotron" >
+  <h1 class="display-3">
     {{ title }}!
+    </h1>
+    <hr class="my-4">
     <nav>
-   <a routerLink="/dashboard">Dashboard</a>
-   <a routerLink="/heros">Heroes</a>
+   <a routerLink="/dashboard" class="btn btn-secondary">Dashboard</a>
+   <a routerLink="/heros" class="btn btn-secondary">Heroes</a>
 </nav>
+<hr class="my-5">
     <router-outlet></router-outlet>
 <!----<app-messages></app-messages>-->
-  </h1>
+ 
   
 

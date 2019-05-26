@@ -1,14 +1,15 @@
-<div *ngIf="actor">
-  <h2>{{actor.name | uppercase}} Details</h2>
-  <div><span>id: </span>{{actor.id}}</div>
-  <div>
-    <label>name:
+<div *ngIf="actor" >
+  <h3>{{actor.name | uppercase}} Details</h3>
+  <div class="card-body"><span>id: </span>{{actor.id}}</div>
+  <div class="modal-content">
+    <label class="modal-body">name:
       <input [(ngModel)]="actor.name" placeholder="name"/>
     </label>
   </div>
- 
-   <button (click)="goBack()">go back</button>
-   <button (click)="save()">Update</button>
+  <div class="modal-footer">
+   <button (click)="goBack()" class="btn btn-primary" style="background-color:#985959 ">go back</button>
+   <button (click)="save()" class="btn btn-secondary" style="background-color:#237d50">Update</button>
+</div>
 </div>
 
     
