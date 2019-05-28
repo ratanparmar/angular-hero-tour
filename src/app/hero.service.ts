@@ -13,6 +13,10 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class HeroService {
+  constructor(
+    private http: HttpClient,
+    private messageService:MessageService
+    ){}
   
   private herosUrl ='/api/heros';
 
@@ -49,27 +53,30 @@ export class HeroService {
 }
 
 searchhero(letter:string):Observable<Hero[]>{
+  
   if(!letter.trim()){
     return of([]);
   }
-  return this.http.get<Hero[]>(`${this.herosUrl}/name=${letter}`);
+  return this.http.get<Hero[]>(`${this.herosUrl}/?name=${letter}`).pipe(
+      tap(_ => this.log(`found heroes matching "${letter}"`)),
+      catchError(this.handleError<Hero[]>('searchHeroes', []))
+    );
+  
 }
 
 
-constructor(
-    private http: HttpClient,
-    private messageService:MessageService
-    ){}
 
-    private log(message:string){
-      this.messageService.add('HeroService :  ${message}');
-    }
+
     private handleError <T>(operation = 'operation',result ?: T ){
       return (error:any):Observable<T> =>{
         console.error(error);
         this.log(`${operation} failed: ${error.message}`);
         return of(result as T);
       }
+    }
+
+    private log(message:string){
+      this.messageService.add('HeroService :  ${message}');
     }
      
 }

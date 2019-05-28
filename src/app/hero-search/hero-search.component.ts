@@ -12,20 +12,22 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 })
 export class HeroSearchComponent implements OnInit {
 
- heroes$ : Observable<Hero[]>;
+ heros$ : Observable<Hero[]>;
  private searchwords = new Subject<string>(); 
+ constructor(private heroService:HeroService) { }
+
   search(words:string):void{
     this.searchwords.next(words);
   }
-  constructor(private heroService:HeroService) { }
-
+  
   ngOnInit() : void {
-    this.heroes$ = this.searchwords.pipe(
+    this.heros$ = this.searchwords.pipe(
       debounceTime(300),
       distinctUntilChanged(),
       switchMap((words:string)=> this.heroService.searchhero(words)),
 
-    );
+    )
+    console.log(this.heros$);
   }
 
 }
